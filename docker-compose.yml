@@ -1,0 +1,65 @@
+services:
+  user-db:
+    image: mongo:7
+    container_name: user-db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - user_db_data:/data/db
+
+  order-db:
+    image: mongo:7
+    container_name: order-db
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - order_db_data:/data/db
+
+  user-service:
+    build:
+      context: ./user-service
+    container_name: user-service
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://user-db:27017/userdb
+      - DB_NAME=userdb
+      - LOG_LEVEL=INFO
+    ports:
+      - "4000:4000"
+    depends_on:
+      - user-db
+
+  order-service:
+    build:
+      context: ./order-service
+    container_name: order-service
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://order-db:27017/orderdb
+      - DB_NAME=orderdb
+      - USER_SERVICE_URL=http://user-service:4000
+      - LOG_LEVEL=INFO
+      - REQUEST_TIMEOUT_SECONDS=3
+    ports:
+      - "5000:5000"
+    depends_on:
+      - order-db
+      - user-service
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    environment:
+      - VITE_ORDER_SERVICE_URL=http://localhost:5000
+    ports:
+      - "3001:3000"
+    depends_on:
+      - order-service
+
+volumes:
+  user_db_data:
+  order_db_data:

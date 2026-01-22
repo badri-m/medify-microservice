@@ -1,0 +1,83 @@
+# ==============================
+# OS / System
+# ==============================
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ==============================
+# IDE / Editor
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# Logs
+# ==============================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================
+# Env / Secrets
+# ==============================
+.env
+.env.*
+*.env
+*.local
+
+# ==============================
+# Python (FastAPI services)
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ==============================
+# Node / React (Vite frontend)
+# ==============================
+node_modules/
+dist/
+.vite/
+
+# Optional local tooling caches
+.eslintcache
+
+# ==============================
+# Docker
+# ==============================
+**/.dockerignore
+
+# ==============================
+# Kubernetes / Minikube
+# ==============================
+# kubeconfig, local cluster state, and tunnel pid files should not be committed
+.kube/
+minikube/
+
+# ==============================
+# Misc
+# ==============================
+coverage/
+*.tgz
