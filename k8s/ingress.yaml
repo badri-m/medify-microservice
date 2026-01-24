@@ -5,8 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: badrimicroservice.local
-      http:
+    - http:
         paths:
           - path: /api
             pathType: Prefix
